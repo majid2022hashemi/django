@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.log
+
+# Environment
+.env
+*.env
+
+# Django
+*.pot
+*.py[cod]
+*.sqlite3
+media/
+staticfiles/
+local_settings.py
+db.sqlite3
+
+# Docker
+docker-compose.override.yml
+*.dockerignore
+*.swp
+# Dockerfile
+
+# Editor/IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python virtual environments
+venv/
+env/
+ENV/
+
+
+
+django.code-workspace
