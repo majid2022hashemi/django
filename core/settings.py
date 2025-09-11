@@ -72,13 +72,30 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
+
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DATABASE_NAME', 'django_db'),      # نام پایگاه داده
+        'USER': os.getenv('DATABASE_USER', 'django_user'),    # نام کاربری
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'django_password'),  # رمز عبور
+        'HOST': os.getenv('DATABASE_HOST', 'db'),             # میزبان پایگاه داده
+        'PORT': os.getenv('DATABASE_PORT', '5432'),           # پورت
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

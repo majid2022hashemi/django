@@ -31,7 +31,7 @@ RUN pip install -r requirements.txt
 COPY . /app/
 
 # Collect static files
-RUN python manage.py collectstatic --noinput
+# RUN python manage.py collectstatic --noinput
 
 # Default command
 CMD ["gunicorn", "django.wsgi:application", "--bind", "0.0.0.0:8000"]
