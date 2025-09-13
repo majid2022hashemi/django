@@ -6,9 +6,7 @@ services:
     env_file:
       - .env
     volumes:
-      - .:/app
-    # ports:
-    #   - "8000:8000" 
+      - .:/app 
 
     expose:
       - "8000"
@@ -22,8 +20,8 @@ services:
       - "80:80"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./static:/app/static
       - ./media:/app/media
+      - ./staticfiles:/app/staticfiles 
     depends_on:
       - web
 
