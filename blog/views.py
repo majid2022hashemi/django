@@ -4,6 +4,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Post
+from rest_framework import generics
+from .serializers import PostSerializer
 
 def post_list(request, debug=False):
     """
@@ -29,3 +31,14 @@ def post_detail(request, id):
         status=Post.Status.PUBLISHED
     )
     return render(request, 'blog/post/detail.html', {'post': post})
+
+
+
+
+# class PostListAPI(generics.ListCreateAPIView):
+#     queryset = Post.published.all()
+#     serializer_class = PostSerializer
+
+# class PostDetailAPI(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Post.published.all()
+#     serializer_class = PostSerializer
