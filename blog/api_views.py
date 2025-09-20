@@ -1,3 +1,5 @@
+
+
 # blog/api_views.py
 from rest_framework import generics
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
@@ -7,9 +9,9 @@ from .serializers import PostSerializer
 class PostListAPI(generics.ListCreateAPIView):
     queryset = Post.published.all()
     serializer_class = PostSerializer
-    renderer_classes = [BrowsableAPIRenderer, JSONRenderer]  # اضافه شد
+    renderer_classes = [BrowsableAPIRenderer, JSONRenderer]  
 
 class PostDetailAPI(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.published.all()
     serializer_class = PostSerializer
-    renderer_classes = [BrowsableAPIRenderer, JSONRenderer]  # اضافه شد
+    renderer_classes = [BrowsableAPIRenderer, JSONRenderer] 

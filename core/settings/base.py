@@ -1,3 +1,6 @@
+
+
+# /home/majid/django/django/core/settings/base.py
 from pathlib import Path
 import os
 
