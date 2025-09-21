@@ -3,9 +3,19 @@
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
+  <!-- Breadcrumb / لینک برگشت -->
+  <p><a href="{% url 'blog:post_list' %}">&larr; Back to Blog</a></p>
+
+  <!-- عنوان پست -->
   <h1>{{ post.title }}</h1>
+
+  <!-- تاریخ و نویسنده با فرمت زیبا -->
   <p class="date">
-    Published {{ post.publish }} by {{ post.author }}
+    Published {{ post.publish|date:"F j, Y, H:i" }} by {{ post.author }}
   </p>
-  {{ post.body|linebreaks }}
+
+  <!-- متن پست با حفظ line breaks -->
+  <div class="post-body">
+    {{ post.body|linebreaks }}
+  </div>
 {% endblock %}

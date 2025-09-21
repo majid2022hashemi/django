@@ -1,19 +1,16 @@
 
 # blog/urls.py
-from django.urls import path
-from django.urls import path, include
 
+from django.urls import path
 from . import views
 
-app_name = 'blog'
+app_name = "blog"
 
 urlpatterns = [
-    # post views
-    path('', views.post_list, name='post_list'),
+    path('', views.PostListView.as_view(), name='post_list'),  # لیست پست‌ها
     path(
-    '<int:year>/<int:month>/<int:day>/<slug:post>/',
-    views.post_detail,
-    name='post_detail'
+        '<int:year>/<int:month>/<int:day>/<slug:post>/',
+        views.PostDetailView.as_view(),
+        name='post_detail'
     ),
-     path('api/', include('blog.api.urls')),
 ]

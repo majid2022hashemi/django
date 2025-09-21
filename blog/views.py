@@ -1,57 +1,29 @@
-# /home/majid/django/django/blog/views.py
+# blog/views.py
 
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic import ListView, DetailView
 from .models import Post
 
-def post_list(request, debug=False):
+class PostListView(ListView):
     """
-    List all published posts with pagination.
-    If debug=True, return a simple HttpResponse for testing.
+    Class-Based View for listing published posts with pagination
     """
-    try:
-        post_list = Post.published.all()
-        paginator = Paginator(post_list, 3)  # ۳ پست در هر صفحه
-         # گرفتن شماره صفحه از آدرس (GET parameter)
-        page_number = request.GET.get('page', 1)
-        try:
-            # گرفتن پست‌های مربوط به اون صفحه
-            posts = paginator.page(page_number)
-        except PageNotAnInteger:
-            # اگر شماره صفحه درست نباشه → صفحه اول
-            posts = paginator.page(1)
-        except EmptyPage:
-            # اگر صفحه‌ای که درخواست شده بزرگتر از تعداد صفحات باشه → آخرین صفحه
-            posts = paginator.page(paginator.num_pages)
-
-        if debug:
-            return HttpResponse(
-                f"Total posts: {paginator.count}, "
-                f"Total pages: {paginator.num_pages}, "
-                f"Current page: {posts.number}"
-            )
-
-        return render(
-            request,
-            'blog/post/list.html',
-            {'posts': posts}
-        )
-    except Exception as e:
-        return HttpResponse(f"Error: {str(e)}")
+    queryset = Post.published.all()        # پست‌های منتشر شده
+    context_object_name = 'posts'          # اسم متغیر در template
+    paginate_by = 3                         # ۳ پست در هر صفحه
+    template_name = 'blog/post/list.html'  # قالب دلخواه
 
 
-def post_detail(request, year, month, day, post):
-    post = get_object_or_404(
-        Post,
-        status=Post.Status.PUBLISHED,
-        slug=post,
-        publish__year=year,
-        publish__month=month,
-        publish__day=day
-    )
-    return render(
-        request,
-        'blog/post/detail.html',
-        {'post': post}
-    )
+
+class PostDetailView(DetailView):
+    """
+    Class-Based View for a single published post
+    """
+    model = Post
+    template_name = 'blog/post/detail.html'
+    context_object_name = 'post'
+
+    def get_queryset(self):
+        """
+        Limit queryset to published posts only
+        """
+        return Post.published.all()
