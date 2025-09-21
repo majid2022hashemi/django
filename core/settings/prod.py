@@ -1,3 +1,6 @@
+# core/settings/prod.py
+
+
 from .base import *
 import os
 
@@ -14,4 +17,11 @@ DATABASES = {
         'HOST': os.getenv('DATABASE_HOST', 'db'),
         'PORT': os.getenv('DATABASE_PORT', '5432'),
     }
+}
+
+
+# core/settings/prod.py
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 3,  # مثلا ۳ پست در هر صفحه
 }
