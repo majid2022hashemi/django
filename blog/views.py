@@ -15,15 +15,17 @@ class PostListView(ListView):
 
 
 class PostDetailView(DetailView):
-    """
-    Class-Based View for a single published post
-    """
     model = Post
     template_name = 'blog/post/detail.html'
     context_object_name = 'post'
+    slug_field = 'slug'
+    slug_url_kwarg = 'post'  # مطابق با نام kwarg در urls.py
 
     def get_queryset(self):
-        """
-        Limit queryset to published posts only
-        """
-        return Post.published.all()
+        return Post.published.filter(
+            publish__year=self.kwargs['year'],
+            publish__month=self.kwargs['month'],
+            publish__day=self.kwargs['day']
+        )
+
+
