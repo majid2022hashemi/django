@@ -1,20 +1,42 @@
-
 # /home/majid/django/django/blog/views.py
 
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Post
 
 def post_list(request, debug=False):
     """
-    List all published posts.
+    List all published posts with pagination.
     If debug=True, return a simple HttpResponse for testing.
     """
     try:
-        posts = Post.published.all()
+        post_list = Post.published.all()
+        paginator = Paginator(post_list, 3)  # ۳ پست در هر صفحه
+         # گرفتن شماره صفحه از آدرس (GET parameter)
+        page_number = request.GET.get('page', 1)
+        try:
+            # گرفتن پست‌های مربوط به اون صفحه
+            posts = paginator.page(page_number)
+        except PageNotAnInteger:
+            # اگر شماره صفحه درست نباشه → صفحه اول
+            posts = paginator.page(1)
+        except EmptyPage:
+            # اگر صفحه‌ای که درخواست شده بزرگتر از تعداد صفحات باشه → آخرین صفحه
+            posts = paginator.page(paginator.num_pages)
+
         if debug:
-            return HttpResponse(f"Found {posts.count()} published posts")
-        return render(request, 'blog/post/list.html', {'posts': posts})
+            return HttpResponse(
+                f"Total posts: {paginator.count}, "
+                f"Total pages: {paginator.num_pages}, "
+                f"Current page: {posts.number}"
+            )
+
+        return render(
+            request,
+            'blog/post/list.html',
+            {'posts': posts}
+        )
     except Exception as e:
         return HttpResponse(f"Error: {str(e)}")
 
