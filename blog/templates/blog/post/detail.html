@@ -17,5 +17,10 @@
   <!-- متن پست با حفظ line breaks -->
   <div class="post-body">
     {{ post.body|linebreaks }}
+    <p>
+    <a href="{% url "blog:post_share" post.id %}">
+      Share this post
+    </a>
+  </p>
   </div>
 {% endblock %}
