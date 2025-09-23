@@ -1,4 +1,5 @@
 
+# blog/api/serializers.py
 from rest_framework import serializers
 from blog.models import Post
 
@@ -15,3 +16,10 @@ class PostSerializer(serializers.ModelSerializer):
             if word.lower() in value.lower():
                 raise serializers.ValidationError(f"عنوان نباید شامل '{word}' باشد.")
         return value
+
+
+class PostShareSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=25)
+    email = serializers.EmailField()
+    to = serializers.EmailField()
+    comments = serializers.CharField(required=False, allow_blank=True)
