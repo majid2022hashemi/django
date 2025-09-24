@@ -1,7 +1,8 @@
 
 # blog/api/serializers.py
 from rest_framework import serializers
-from blog.models import Post
+from blog.models import Post, Comment
+
 
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(read_only=True, slug_field='username')
@@ -23,3 +24,12 @@ class PostShareSerializer(serializers.Serializer):
     email = serializers.EmailField()
     to = serializers.EmailField()
     comments = serializers.CharField(required=False, allow_blank=True)
+
+
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ['id', 'post', 'name', 'email', 'body', 'created', 'active']
+        read_only_fields = ['id', 'created', 'active']
