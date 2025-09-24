@@ -3,8 +3,10 @@
 from django.core.mail import send_mail
 from django.views.generic import ListView, DetailView
 from .models import Post
-from .forms import EmailPostForm
+from .forms import EmailPostForm, CommentForm
 from django.shortcuts import get_object_or_404, render
+from django.views.decorators.http import require_POST
+
 
 class PostListView(ListView):
     """
@@ -17,12 +19,27 @@ class PostListView(ListView):
 
 
 
+# class PostDetailView(DetailView):
+#     model = Post
+#     template_name = 'blog/post/detail.html'
+#     context_object_name = 'post'
+#     slug_field = 'slug'
+#     slug_url_kwarg = 'post'  # مطابق با نام kwarg در urls.py
+
+#     def get_queryset(self):
+#         return Post.published.filter(
+#             publish__year=self.kwargs['year'],
+#             publish__month=self.kwargs['month'],
+#             publish__day=self.kwargs['day']
+#         )
+
+
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post/detail.html'
     context_object_name = 'post'
     slug_field = 'slug'
-    slug_url_kwarg = 'post'  # مطابق با نام kwarg در urls.py
+    slug_url_kwarg = 'post'  # مطابق با urls.py
 
     def get_queryset(self):
         return Post.published.filter(
@@ -30,6 +47,22 @@ class PostDetailView(DetailView):
             publish__month=self.kwargs['month'],
             publish__day=self.kwargs['day']
         )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        post = self.object
+
+        # لیست کامنت‌های فعال برای این پست
+        comments = post.comments.filter(active=True)
+
+        # فرم خالی برای اضافه کردن کامنت
+        form = CommentForm()
+
+        # داده‌های اضافه برای قالب
+        context['comments'] = comments
+        context['form'] = form
+        return context
+
 
 
 def post_share(request, post_id):
@@ -81,4 +114,32 @@ def post_share(request, post_id):
             'form': form,
             'sent': sent
         },
+    )
+
+
+
+
+@require_POST
+def post_comment(request, post_id):
+    post = get_object_or_404(
+        Post,
+        id=post_id,
+        status=Post.Status.PUBLISHED
+    )
+    comment = None
+
+    form = CommentForm(data=request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.post = post
+        comment.save()
+
+    return render(
+        request,
+        'blog/post/comment.html',
+        {
+            'post': post,
+            'form': form,
+            'comment': comment
+        }
     )
