@@ -52,18 +52,18 @@ class PostShareAPI(generics.GenericAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
 class CommentListCreateAPI(generics.ListCreateAPIView):
-    """
-    GET: لیست کامنت‌های یک پست
-    POST: ثبت کامنت جدید برای یک پست
-    """
     serializer_class = CommentSerializer
 
     def get_queryset(self):
-        post_id = self.kwargs['post_id']
+        post_id = self.kwargs["post_id"]
         return Comment.objects.filter(post_id=post_id, active=True)
 
     def perform_create(self, serializer):
-        post_id = self.kwargs['post_id']
+        post_id = self.kwargs["post_id"]
         serializer.save(post_id=post_id)
+
+
+class CommentDetailAPI(generics.RetrieveUpdateDestroyAPIView):  
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer

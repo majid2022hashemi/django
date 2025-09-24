@@ -19,20 +19,6 @@ class PostListView(ListView):
 
 
 
-# class PostDetailView(DetailView):
-#     model = Post
-#     template_name = 'blog/post/detail.html'
-#     context_object_name = 'post'
-#     slug_field = 'slug'
-#     slug_url_kwarg = 'post'  # مطابق با نام kwarg در urls.py
-
-#     def get_queryset(self):
-#         return Post.published.filter(
-#             publish__year=self.kwargs['year'],
-#             publish__month=self.kwargs['month'],
-#             publish__day=self.kwargs['day']
-#         )
-
 
 class PostDetailView(DetailView):
     model = Post
@@ -143,3 +129,5 @@ def post_comment(request, post_id):
             'comment': comment
         }
     )
+
+
