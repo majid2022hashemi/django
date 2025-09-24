@@ -2,13 +2,16 @@
 # api/urls.py
 
 from django.urls import path
-
-# اگر بعداً view در api/views.py ساختی، می‌تونی import کنی:
-# from . import views
+from django.http import JsonResponse
 
 app_name = "api"
 
+def api_root(request):
+    return JsonResponse({
+        "blog_api": "/api/blog/",
+        "docs": "/api/docs/"  # می‌تونی بعداً اضافه کنی
+    })
+
 urlpatterns = [
-    # نمونه مسیر پایه، بعداً می‌تونی route های واقعی اضافه کنی
-    # path("something/", views.SomeView.as_view(), name="something"),
+    path("", api_root, name="api-root"),
 ]
