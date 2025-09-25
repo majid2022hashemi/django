@@ -113,13 +113,15 @@ def post_comment(request, post_id):
         status=Post.Status.PUBLISHED
     )
     comment = None
-
+    # A comment was posted
     form = CommentForm(data=request.POST)
     if form.is_valid():
+        # Create a Comment object without saving it to the database
         comment = form.save(commit=False)
+        # Assign the post to the comment
         comment.post = post
+        # Save the comment to the database
         comment.save()
-
     return render(
         request,
         'blog/post/comment.html',
@@ -129,5 +131,6 @@ def post_comment(request, post_id):
             'comment': comment
         }
     )
+
 
 
