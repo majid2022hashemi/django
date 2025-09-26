@@ -20,6 +20,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+     # پکیج‌های خارجی
+    'taggit',
+
     'api',
     'rest_framework',
     
