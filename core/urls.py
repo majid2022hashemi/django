@@ -7,6 +7,8 @@ from django.urls import include, path
 from blog.sitemaps import PostSitemap
 
 
+
+
 sitemaps = {
     'posts': PostSitemap,
 }
@@ -20,6 +22,8 @@ urlpatterns = [
         {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'
     ),
+
+
      # API عمومی پروژه
     path("api/", include("api.urls", namespace="api")),
 
