@@ -2,15 +2,16 @@
 
 # core/settings/base.py
 from pathlib import Path
-import os
+from decouple import config 
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-change-me')
+SECRET_KEY = config('SECRET_KEY', 'django-insecure-change-me')
 
 DEBUG = True
 
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', '').split(',')
+
 
 SITE_ID = 1
 
