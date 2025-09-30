@@ -33,4 +33,4 @@ django-rosetta==0.10.0
 django-parler==2.3
 django-localflavor==4.0
 psutil==6.0.0
-
+python-decouple==3.8
