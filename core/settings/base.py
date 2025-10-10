@@ -25,13 +25,9 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
     'django.contrib.postgres',
-
-     # پکیج‌های خارجی
     'taggit',
-
     'api',
     'rest_framework',
-    
     'blog',
 ]
 
