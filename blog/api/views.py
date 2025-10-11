@@ -7,7 +7,6 @@ from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 from rest_framework.response import Response
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
-
 from blog.models import Post, Comment
 from .serializers import PostSerializer, PostShareSerializer, CommentSerializer
 

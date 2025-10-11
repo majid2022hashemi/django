@@ -1,5 +1,6 @@
 
 
+# /home/majid/django/django/blog/templatetags/blog_tags.py
 from django import template
 from django.db.models import Count
 from ..models import Post

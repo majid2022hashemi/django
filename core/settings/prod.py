@@ -2,7 +2,6 @@
 
 from .base import *
 from decouple import config
-import os
 
 # ===== DEBUG =====
 DEBUG = config('DEBUG', default=False, cast=bool)
@@ -51,7 +50,7 @@ SECURE_CONTENT_TYPE_NOSNIFF = config('SECURE_CONTENT_TYPE_NOSNIFF', default=True
 
 # ===== هوشمند: اگر DEBUG=True یا در local Docker هستیم، HTTPS را غیرفعال کن =====
 # این شرط باعث می‌شود development محلی بدون SSL کار کند
-if DEBUG or os.environ.get('DOCKER_LOCAL', 'False') == 'True':
+if DEBUG or config.get('DOCKER_LOCAL', 'False') == 'True':
     SECURE_SSL_REDIRECT = False
     SESSION_COOKIE_SECURE = False
     CSRF_COOKIE_SECURE = False
