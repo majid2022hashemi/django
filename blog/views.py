@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-=======
 from django.contrib.postgres.search import TrigramSimilarity
 from django.core.mail import send_mail
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -12,19 +8,8 @@ from django.views.generic import ListView
 from taggit.models import Tag
 
 from .forms import CommentForm, EmailPostForm, SearchForm
->>>>>>> feat/blog-API
 from .models import Post
 
-<<<<<<< HEAD
-def home(request):
-    return HttpResponse("<h1>Hello Django + Docker + Nginx 👋</h1>")
-
-def post_list(request, debug=False):
-    """
-    List all published posts.
-    If debug=True, return a simple HttpResponse for testing.
-    """
-=======
 
 def post_list(request, tag_slug=None):
     post_list = Post.published.all()
@@ -35,7 +20,6 @@ def post_list(request, tag_slug=None):
     # Pagination with 3 posts per page
     paginator = Paginator(post_list, 3)
     page_number = request.GET.get('page', 1)
->>>>>>> feat/blog-API
     try:
         posts = paginator.page(page_number)
     except PageNotAnInteger:
@@ -53,15 +37,8 @@ def post_list(request, tag_slug=None):
         }
     )
 
-<<<<<<< HEAD
-def post_detail(request, id):
-    """
-    Show details of a single published post.
-    """
-=======
 
 def post_detail(request, year, month, day, post):
->>>>>>> feat/blog-API
     post = get_object_or_404(
         Post,
         status=Post.Status.PUBLISHED,
@@ -154,8 +131,6 @@ def post_share(request, post_id):
         },
     )
 
-<<<<<<< HEAD
-=======
 
 @require_POST
 def post_comment(request, post_id):
@@ -211,4 +186,3 @@ def post_search(request):
             'results': results
         },
     )
->>>>>>> feat/blog-API
