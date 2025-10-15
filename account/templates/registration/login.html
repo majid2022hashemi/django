@@ -1,10 +1,9 @@
-{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>{% block title %}{% endblock %}</title>
-  <link href="{% static "account/css/base.css" %}" rel="stylesheet">
+  <title>{% block title %}My App{% endblock %}</title>
+  <link href="{% static 'account/css/base.css' %}" rel="stylesheet">
 </head>
 <body>
   <div id="header">
@@ -21,22 +20,22 @@
           <a href="#">People</a>
         </li>
       </ul>
-    {% endif %}
-    <span class="user">
-      {% if request.user.is_authenticated %}
+      <span class="user">
         Hello {{ request.user.first_name|default:request.user.username }},
-        <form action="{% url "logout" %}" method="post">
-          <button type="submit">Logout</button>
+        <form action="{% url 'account:logout' %}" method="post" style="display:inline;">
           {% csrf_token %}
+          <button type="submit">Logout</button>
         </form>
-      {% else %}
-        <a href="{% url "login" %}">Log-in</a>
-      {% endif %}
-    </span>
+      </span>
+    {% else %}
+      <span class="user">
+        <a href="{% url 'account:login' %}">Log-in</a>
+      </span>
+    {% endif %}
   </div>
+
   <div id="content">
-    {% block content %}
-    {% endblock %}
+    {% block content %}{% endblock %}
   </div>
 </body>
 </html>
