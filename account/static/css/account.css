@@ -1,4 +1,8 @@
-@import url(//fonts.googleapis.com/css?family=Muli);
+
+/* /home/majid/django/django/account/static/css/account.css */
+/* @import url(//fonts.googleapis.com/css?family=Muli); */
+@import url("https://fonts.googleapis.com/css?family=Muli");
+
 
 body {
     margin:0;

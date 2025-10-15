@@ -1,3 +1,6 @@
+
+
+# /home/majid/django/django/docker-compose.yml
 services:
 
   web:

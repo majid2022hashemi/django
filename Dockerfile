@@ -1,3 +1,4 @@
+# /home/majid/django/django/Dockerfile
 # Use official Python image
 FROM python:3.12-slim
 
@@ -35,4 +36,3 @@ RUN python manage.py collectstatic --noinput
 
 # Default command
 CMD ["gunicorn", "django.wsgi:application", "--bind", "0.0.0.0:8000"]
-
