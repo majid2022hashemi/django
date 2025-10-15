@@ -1,10 +1,13 @@
+{% comment %} /home/majid/django/django/account/templates/base.html {% endcomment %}
 {% load static %}
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <title>{% block title %}{% endblock %}</title>
-  <link href="{% static "account/css/base.css" %}" rel="stylesheet">
+ 
+  <link href="{% static 'css/account.css' %}?v=2" rel="stylesheet">
+
 </head>
 <body>
   <div id="header">
