@@ -1,3 +1,4 @@
+<!-- /home/majid/django/django/docs/docker-staticfiles-fix.md -->
 # 🧩 Troubleshooting Static Files in Dockerized Django (Nginx + Gunicorn)
 
 ## 📘 Problem

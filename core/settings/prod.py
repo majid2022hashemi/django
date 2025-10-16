@@ -12,6 +12,8 @@ ALLOWED_HOSTS = config(
     default='127.0.0.1,localhost'
 ).split(',')
 
+
+
 # ===== DATABASE =====
 DATABASES = {
     'default': {
@@ -47,6 +49,16 @@ SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=True, cast=bool)
 CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', default=True, cast=bool)
 SECURE_BROWSER_XSS_FILTER = config('SECURE_BROWSER_XSS_FILTER', default=True, cast=bool)
 SECURE_CONTENT_TYPE_NOSNIFF = config('SECURE_CONTENT_TYPE_NOSNIFF', default=True, cast=bool)
+
+# ===== CSRF Trusted Origins =====
+
+
+CSRF_TRUSTED_ORIGINS = config(
+    'CSRF_TRUSTED_ORIGINS',
+    default='http://localhost,http://127.0.0.1'
+).split(',')
+
+
 
 # ===== هوشمند: اگر DEBUG=True یا در local Docker هستیم، HTTPS را غیرفعال کن =====
 # این شرط باعث می‌شود development محلی بدون SSL کار کند
