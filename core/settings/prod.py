@@ -69,7 +69,4 @@ if DEBUG or config.get('DOCKER_LOCAL', 'False') == 'True':
 
 
 
-LOGIN_REDIRECT_URL = 'dashboard'
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
 
