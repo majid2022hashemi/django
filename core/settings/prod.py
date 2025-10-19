@@ -62,11 +62,31 @@ CSRF_TRUSTED_ORIGINS = config(
 
 # ===== هوشمند: اگر DEBUG=True یا در local Docker هستیم، HTTPS را غیرفعال کن =====
 # این شرط باعث می‌شود development محلی بدون SSL کار کند
-if DEBUG or config.get('DOCKER_LOCAL', 'False') == 'True':
+# if DEBUG or config.get('DOCKER_LOCAL', 'False') == 'True':
+#     SECURE_SSL_REDIRECT = False
+#     SESSION_COOKIE_SECURE = False
+#     CSRF_COOKIE_SECURE = False
+
+
+
+
+if DEBUG or config('DOCKER_LOCAL', default=False, cast=bool):
     SECURE_SSL_REDIRECT = False
     SESSION_COOKIE_SECURE = False
     CSRF_COOKIE_SECURE = False
 
+# # ===== تنظیم دامنه‌ی سایت برای لینک‌های ایمیل =====
+# from django.contrib.sites.models import Site
 
+# SITE_ID = 1
 
+# SITE_DOMAIN = config('SITE_DOMAIN', default='localhost:8000')
+# SITE_NAME = config('SITE_NAME', default='Localhost')
 
+# try:
+#     site = Site.objects.get(pk=SITE_ID)
+#     site.domain = SITE_DOMAIN
+#     site.name = SITE_NAME
+#     site.save()
+# except Exception:
+#     pass
