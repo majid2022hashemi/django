@@ -58,7 +58,8 @@ CSRF_TRUSTED_ORIGINS = config(
     default='http://localhost,http://127.0.0.1'
 ).split(',')
 
-
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # ===== هوشمند: اگر DEBUG=True یا در local Docker هستیم، HTTPS را غیرفعال کن =====
 # این شرط باعث می‌شود development محلی بدون SSL کار کند
