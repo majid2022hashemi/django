@@ -21,12 +21,15 @@ urlpatterns = [
         {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'
     ),
+    path('social-auth/', include('social_django.urls', namespace='social')),
 
      # API for public project
     path("api/", include("api.urls", namespace="api")),
 
     # API for blog App
     path("api/blog/", include("blog.api.urls", namespace="blog_api")),
+
+
 ]
 
 # if settings.DEBUG:

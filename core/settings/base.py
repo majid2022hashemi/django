@@ -14,7 +14,7 @@ DEBUG = True
 ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', '').split(',')
 
 
-SITE_ID = 2
+SITE_ID = 3
 
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'api',
     'rest_framework',
     'blog',
+
+    'social_django',
 ]
 
 MIDDLEWARE = [
